@@ -32,3 +32,6 @@ document.getElementById("container").innerHtml = GraphSvg.toSvg("svgElementId", 
 to generate a svg:
 
 ![Svg Graph](http://reza1024.github.io/GraphSvg/GraphSvg.svg)
+
+## To Do
+Automatic embeddingh of planar graphs is coming soon
