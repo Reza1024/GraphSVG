@@ -1,0 +1,69 @@
+﻿<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>GraphSvg</title>
+	<script src="GraphSvg.js"></script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>
+				<textarea id="graphData" style="height: 600px; width: 700px;">
+{
+  "graph": {
+    "vertices": [{"x":30,"y":150}, {"x":130,"y":230}, {"x":130,"y":70}, {"x":230,"y": 150}],
+    "verticesLabel": ["A", "B", "C", "D"],
+    "edges": [[0, 1], [0, 2], [0, 3], [1, 2]],
+    "edgesWeight": [1, 1, 5, 1],
+    "verticesHoverLabel": ["Apple", "Book", "Cat", "Dog"]
+  },
+  "settings": {
+    "width": 460,
+    "height": 260,
+    "edgeWidth": 1.5,
+    "vertexStrokeWidth": 1,
+    "vertexRadius": 19,
+    "vertexStrokeColor": "#BECFE9",
+    "edgeColor": "#CFE9BE",
+    "vertexFillColor": "#E9BECF"
+  }
+}
+				</textarea>
+			</td>
+			<td id="graphSvgContainer" style="vertical-align: top;" />
+		</tr>
+		<tr style="text-align: center;">
+			<td>
+				<button onclick="showSvg();">Show Svg</button>
+			</td>
+			<td>
+				<button id="saveButton" onclick="saveSvg();" style="display: none;">Save Svg</button>
+				<span id="download"></span>
+			</td>
+		</tr>
+	</table>
+
+	<script>
+		var svgGraph;
+		function showSvg() {
+			var graphDataJson = document.getElementById("graphData").value;
+			var graphData = JSON.parse(graphDataJson);
+			svgGraph = GraphSvg.toSvg("graphElementId", graphData.graph, graphData.settings);
+			document.getElementById("graphSvgContainer").innerHTML = svgGraph;
+			document.getElementById("saveButton").style.display = null;
+		}
+
+		function saveSvg() {
+			window.URL = window.webkitURL || window.URL;
+			var file = new Blob([svgGraph], { type: 'image/svg+xml' });
+			var a = document.createElement('a');
+			a.href = window.URL.createObjectURL(file);
+			a.download = 'graph.svg';
+			a.textContent = "SVG";
+			var svgContainer = document.getElementById("download");
+			svgContainer.innerHTML = "";
+			svgContainer.appendChild(a);
+		}
+	</script>
+</body>
+</html>
