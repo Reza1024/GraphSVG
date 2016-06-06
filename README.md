@@ -40,7 +40,7 @@ GraphSvg.toSvg("#container", "svgElementId", graph, settings);
 
 to generate a svg:
 
-![Svg Graph](http://reza1024.github.io/GraphSvg/GraphSvg.svg)
+![SVG Image](http://reza1024.github.io/GraphSvg/GraphSvg.svg)
 
 ## To Do
 Automatic embedding of planar graphs is coming soon
