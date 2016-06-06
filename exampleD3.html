@@ -1,0 +1,77 @@
+﻿<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>GraphSvg</title>
+	<script src="GraphSvgD3.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<style>
+		.vertices {
+			stroke-width: 3px;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>
+				<textarea id="graphData" style="height: 600px; width: 700px;">
+{
+  "graph": {
+    "vertices": [
+      { "x": 20, "y": 100, "label": "A", "hoverLabel": "Apple"},
+      { "x": 120, "y": 180, "label": "B", "hoverLabel": "Book"},
+      { "x": 120, "y": 20, "label": "C", "hoverLabel": "Cat"},
+      { "x":220, "y": 100, "label": "D", "hoverLabel": "Dog", "weight": 0.75 }],
+    "edges": [ { "v1": 0, "v2": 1 } , { "v1": 0, "v2": 2 }, { "v1": 0, "v2" : 3, "weight": 5 }, { "v1": 1, "v2": 2 }]
+  },
+  "settings": {
+    "width": 240,
+    "height": 200,
+    "edgeWidth": 1.5,
+    "vertexStrokeWidth": 1,
+    "vertexRadius": 19,
+    "vertexStrokeColor": "#BECFE9",
+    "edgeColor": "#CFE9BE",
+    "vertexFillColor": "#E9BECF"
+  }
+}
+				</textarea>
+			</td>
+			<td id="graphSvgContainer" style="vertical-align: top;" />
+		</tr>
+		<tr style="text-align: center;">
+			<td>
+				<button onclick="updateSvg();">Regenerate Svg</button>
+			</td>
+			<td>
+				<button id="saveButton" onclick="saveSvg();" style="display: none;">Save Svg</button>
+				<span id="download"></span>
+			</td>
+		</tr>
+	</table>
+
+	<script>
+		var svgGraph;
+		function updateSvg() {
+			var graphDataJson = document.getElementById("graphData").value;
+			var graphData = JSON.parse(graphDataJson);
+			GraphSvgD3.toSvg("#graphSvgContainer", "graphElementId", graphData.graph, graphData.settings);
+			document.getElementById("saveButton").style.display = null;
+		}
+
+		updateSvg();
+
+		function saveSvg() {
+			window.URL = window.webkitURL || window.URL;
+			var file = new Blob([svgGraph], { type: 'image/svg+xml' });
+			var a = document.createElement('a');
+			a.href = window.URL.createObjectURL(file);
+			a.download = 'graph.svg';
+			a.textContent = "SVG";
+			var svgContainer = document.getElementById("download");
+			svgContainer.innerHTML = "";
+			svgContainer.appendChild(a);
+		}
+	</script>
+</body>
+</html>

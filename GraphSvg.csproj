@@ -22,11 +22,14 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="exampleD3.html" />
     <Content Include="example.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="GraphSvg.ts" />
+    <TypeScriptCompile Include="GraphSvgD3.ts" />
+    <TypeScriptCompile Include="Scripts\d3.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENSE" />
