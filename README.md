@@ -15,7 +15,7 @@ var graph = {
 	verticesHoverLabel: ["Apple", "Book", "Cat", "Dog"] // optional
 };
 
-var svgSettings: {
+var svgSettings = {
 	width: 240,
 	height: 200,
 	edgeWidth: 1.5,
