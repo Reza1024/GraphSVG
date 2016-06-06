@@ -1,7 +1,7 @@
 # GraphSvg
 A javascript/typescript library for converting graphs to SVG images.
 
-## See it [online](http://reza1024.github.io/GraphSvg/)
+## See it [online](https://reza1024.github.io/GraphSvg/)
 
 ## How to use it in your code
 Just include [`d3`](http://d3js.org/d3.v3.min.js) and `GraphSvg.js` in your page and pass the graph information:
@@ -10,7 +10,7 @@ Just include [`d3`](http://d3js.org/d3.v3.min.js) and `GraphSvg.js` in your page
 var graph = {
 	vertices: [
 		{ x: 20, y: 100, label: "A", hoverLabel: "Apple"},
-		{ x: 120, y: 180, label: "B", hoverLabel: "Book"},
+		{ x: 120, y: 180, hoverLabel: "Book"},
 		{ x: 120, y: 20, label: "C" },
 		{ x: 220, y: 100, label: "D", hoverLabel: "Dog", weight: 0.75 }
 	],
