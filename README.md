@@ -1,6 +1,9 @@
 # GraphSvg
 A javascript/typescript library for converting graphs to SVG images.
 
+## See it [online](http://reza1024.github.io/GraphSvg/)
+
+## How to use it in your code
 Just include the `GraphSvg.js` in your page and pass the graph information:
 
 ``` javascript
@@ -28,4 +31,4 @@ document.getElementById("container").innerHtml = GraphSvg.toSvg("graphElementId"
 
 to generate a svg:
 
-![Svg Graph](http://reza1024.github.io/GraphSvg.svg)
+![Svg Graph](http://reza1024.github.io/GraphSvg/GraphSvg.svg)
