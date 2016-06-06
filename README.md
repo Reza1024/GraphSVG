@@ -23,7 +23,7 @@ var svgSettings: {
 	vertexFillColor: "#E9BECF"
 };
 
-GraphSvg.toSvg("graphElementId", graph, settings);
+document.getElementById("container").innerHtml = GraphSvg.toSvg("graphElementId", graph, settings);
 ```
 
 to generate a svg:
