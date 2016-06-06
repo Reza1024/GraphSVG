@@ -4,10 +4,6 @@
 	<title>GraphSvg</title>
 	<script src="GraphSvgD3.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
-	<style>
-		.vertices {
-			stroke-width: 3px;
-		}
 	</style>
 </head>
 <body>
@@ -53,25 +49,25 @@
 	<script>
 		var svgGraph;
 		function updateSvg() {
-			var graphDataJson = document.getElementById("graphData").value;
+			var graphDataJson = d3.select("#graphData").html();
 			var graphData = JSON.parse(graphDataJson);
 			GraphSvgD3.toSvg("#graphSvgContainer", "graphElementId", graphData.graph, graphData.settings);
-			document.getElementById("saveButton").style.display = null;
+			d3.select("#saveButton")
+				.style("display", null);
+		}
+
+		function saveSvg() {
+			window.URL = window.URL || window.webkitURL;
+			var file = new Blob([svgGraph], { type: 'image/svg+xml' });
+			d3.select("#download")
+				.html("").append("a")
+				.attr("href", window.URL.createObjectURL(file))
+				.attr("download", "graph.svg")
+				.text("SVG");
 		}
 
 		updateSvg();
 
-		function saveSvg() {
-			window.URL = window.webkitURL || window.URL;
-			var file = new Blob([svgGraph], { type: 'image/svg+xml' });
-			var a = document.createElement('a');
-			a.href = window.URL.createObjectURL(file);
-			a.download = 'graph.svg';
-			a.textContent = "SVG";
-			var svgContainer = document.getElementById("download");
-			svgContainer.innerHTML = "";
-			svgContainer.appendChild(a);
-		}
 	</script>
 </body>
 </html>
