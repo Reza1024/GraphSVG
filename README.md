@@ -4,15 +4,22 @@ A javascript/typescript library for converting graphs to SVG images.
 ## See it [online](http://reza1024.github.io/GraphSvg/)
 
 ## How to use it in your code
-Just include the `GraphSvg.js` in your page and pass the graph information:
+Just include [`d3`](http://d3js.org/d3.v3.min.js) and `GraphSvg.js` in your page and pass the graph information:
 
 ``` javascript
 var graph = {
-	vertices: [{x:20, y:100}, {x:120, y:180}, {x:120, y:20}, {x:220, y: 100}],
-	verticesLabel: ["A", "B", "C", "D"], // optional
-	edges: [[0, 1], [0, 2], [0, 3], [1, 2]],
-	edgesWeight: [1, 1, 5, 1], // optional
-	verticesHoverLabel: ["Apple", "Book", "Cat", "Dog"] // optional
+	vertices: [
+		{ "x": 20, "y": 100, "label": "A", "hoverLabel": "Apple"},
+		{ "x": 120, "y": 180, "label": "B", "hoverLabel": "Book"},
+		{ "x": 120, "y": 20, "label": "C", "hoverLabel": "Cat"},
+		{ "x": 220, "y": 100, "label": "D", "hoverLabel": "Dog", "weight": 0.75 }
+	],
+	"edges": [
+		{ "v1": 0, "v2": 1 },
+		{ "v1": 0, "v2": 2 },
+		{ "v1": 0, "v2" : 3, "weight": 5 },
+		{ "v1": 1, "v2": 2 }
+	]
 };
 
 var svgSettings = {
@@ -25,8 +32,10 @@ var svgSettings = {
 	edgeColor: "#CFE9BE", // optional
 	vertexFillColor: "#E9BECF" // optional
 };
-
-document.getElementById("container").innerHtml = GraphSvg.toSvg("svgElementId", graph, settings);
+```
+then call
+``` javascript
+GraphSvg.toSvg("#container", "svgElementId", graph, settings);
 ```
 
 to generate a svg:
