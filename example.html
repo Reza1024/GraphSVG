@@ -2,9 +2,8 @@
 <head>
 	<meta charset="utf-8" />
 	<title>GraphSvg</title>
-	<script src="GraphSvgD3.js"></script>
+	<script src="GraphSvg.js"></script>
 	<script src="http://d3js.org/d3.v3.min.js"></script>
-	</style>
 </head>
 <body>
 	<table>
@@ -14,11 +13,17 @@
 {
   "graph": {
     "vertices": [
-      { "x": 20, "y": 100, "label": "A", "hoverLabel": "Apple"},
-      { "x": 120, "y": 180, "label": "B", "hoverLabel": "Book"},
-      { "x": 120, "y": 20, "label": "C", "hoverLabel": "Cat"},
-      { "x":220, "y": 100, "label": "D", "hoverLabel": "Dog", "weight": 0.75 }],
-    "edges": [ { "v1": 0, "v2": 1 } , { "v1": 0, "v2": 2 }, { "v1": 0, "v2" : 3, "weight": 5 }, { "v1": 1, "v2": 2 }]
+      { "x": 20, "y": 100, "label": "A", "hoverLabel": "Apple" },
+      { "x": 120, "y": 180, "hoverLabel": "Book" },
+      { "x": 120, "y": 20, "label": "C" },
+      { "x":220, "y": 100, "label": "D", "hoverLabel": "Dog", "weight": 0.75 }
+    ],
+    "edges": [
+      { "v1": 0, "v2": 1 },
+      { "v1": 0, "v2": 2 },
+      { "v1": 0, "v2" : 3, "weight": 5 },
+      { "v1": 1, "v2": 2 }
+    ]
   },
   "settings": {
     "width": 240,
@@ -47,18 +52,17 @@
 	</table>
 
 	<script>
-		var svgGraph;
 		function updateSvg() {
-			var graphDataJson = d3.select("#graphData").html();
+			var graphDataJson = document.getElementById("graphData").value;
 			var graphData = JSON.parse(graphDataJson);
-			GraphSvgD3.toSvg("#graphSvgContainer", "graphElementId", graphData.graph, graphData.settings);
+			GraphSvg.toSvg("#graphSvgContainer", "graphElementId", graphData.graph, graphData.settings);
 			d3.select("#saveButton")
 				.style("display", null);
 		}
 
 		function saveSvg() {
 			window.URL = window.URL || window.webkitURL;
-			var file = new Blob([svgGraph], { type: 'image/svg+xml' });
+			var file = new Blob([d3.select("#graphSvgContainer").html()], { type: 'image/svg+xml' });
 			d3.select("#download")
 				.html("").append("a")
 				.attr("href", window.URL.createObjectURL(file))

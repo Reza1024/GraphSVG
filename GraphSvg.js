@@ -1,11 +1,10 @@
-/// <reference path="GraphSvg.ts"/>
 /// <reference path="Scripts/d3.d.ts"/>
 "use strict";
-var GraphSvgD3 = (function () {
-    function GraphSvgD3() {
+var GraphSvg = (function () {
+    function GraphSvg() {
     }
-    GraphSvgD3.toSvg = function (svgContainerSelector, elementId, graph, settings) {
-        var svg = GraphSvgD3._buildSvgStructure(svgContainerSelector, elementId)
+    GraphSvg.toSvg = function (svgContainerSelector, elementId, graph, settings) {
+        var svg = GraphSvg._buildSvgStructure(svgContainerSelector, elementId)
             .attr("width", settings.width)
             .attr("height", settings.height)
             .attr("viewBox", settings.svgViewBox);
@@ -20,7 +19,7 @@ var GraphSvgD3 = (function () {
         vertices
             .attr("cx", function (v) { return v.x; })
             .attr("cy", function (v) { return v.y; })
-            .attr("r", function (v) { return GraphSvgD3._radius(v, settings); })
+            .attr("r", function (v) { return GraphSvg._radius(v, settings); })
             .attr("class", function (e) { return e.class; });
         vertices.exit().remove();
         var edges = svg
@@ -46,7 +45,7 @@ var GraphSvgD3 = (function () {
         verticesClipPath.html("").append("circle")
             .attr("cx", function (v) { return v.x; })
             .attr("cy", function (v) { return v.y; })
-            .attr("r", function (v) { return GraphSvgD3._radius(v, settings); });
+            .attr("r", function (v) { return GraphSvg._radius(v, settings); });
         verticesClipPath.exit().remove();
         var verticesImage = svg
             .selectAll("g.verticesImage > image")
@@ -55,10 +54,10 @@ var GraphSvgD3 = (function () {
         verticesImage
             .attr("xlink:href", function (v) { return v.imageUrl; })
             .attr("clip-path", function (v, i) { return ("url(#" + elementId + "-v" + i + ")\""); })
-            .attr("x", function (v) { return v.x - GraphSvgD3._radius(v, settings); })
-            .attr("y", function (v) { return v.y - GraphSvgD3._radius(v, settings); })
-            .attr("width", function (v) { return 2 * GraphSvgD3._radius(v, settings) + 1; })
-            .attr("height", function (v) { return 2 * GraphSvgD3._radius(v, settings) + 1; });
+            .attr("x", function (v) { return v.x - GraphSvg._radius(v, settings); })
+            .attr("y", function (v) { return v.y - GraphSvg._radius(v, settings); })
+            .attr("width", function (v) { return 2 * GraphSvg._radius(v, settings) + 1; })
+            .attr("height", function (v) { return 2 * GraphSvg._radius(v, settings) + 1; });
         verticesImage.exit().remove();
         var verticesLabel = svg
             .select("g.verticesLabels")
@@ -80,10 +79,10 @@ var GraphSvgD3 = (function () {
                 .append("title").text(function (v) { return v.hoverLabel; });
         });
     };
-    GraphSvgD3._radius = function (v, settings) {
+    GraphSvg._radius = function (v, settings) {
         return v.weight ? v.weight * settings.vertexRadius : settings.vertexRadius;
     };
-    GraphSvgD3._buildSvgStructure = function (svgContainerSelector, elementId) {
+    GraphSvg._buildSvgStructure = function (svgContainerSelector, elementId) {
         var svg = d3.select(svgContainerSelector).select("svg");
         if (svg.empty()) {
             svg = d3.select(svgContainerSelector).append("svg")
@@ -99,7 +98,7 @@ var GraphSvgD3 = (function () {
         }
         return svg;
     };
-    return GraphSvgD3;
+    return GraphSvg;
 }());
-exports.GraphSvgD3 = GraphSvgD3;
-//# sourceMappingURL=GraphSvgD3.js.map
+exports.GraphSvg = GraphSvg;
+//# sourceMappingURL=GraphSvg.js.map

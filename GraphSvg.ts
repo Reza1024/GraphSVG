@@ -1,5 +1,4 @@
-﻿/// <reference path="GraphSvg.ts"/>
-/// <reference path="Scripts/d3.d.ts"/>
+﻿/// <reference path="Scripts/d3.d.ts"/>
 
 export module GraphSvg {
 	export interface IVertex {
@@ -38,9 +37,9 @@ export module GraphSvg {
 	}
 }
 
-export class GraphSvgD3 {
+export class GraphSvg {
 	static toSvg(svgContainerSelector: string, elementId: string, graph: GraphSvg.IGraph, settings: GraphSvg.ISettings): void {
-		var svg = GraphSvgD3._buildSvgStructure(svgContainerSelector, elementId)
+		var svg = GraphSvg._buildSvgStructure(svgContainerSelector, elementId)
 			.attr("width", settings.width)
 			.attr("height", settings.height)
 			.attr("viewBox", settings.svgViewBox);
@@ -56,7 +55,7 @@ export class GraphSvgD3 {
 		vertices
 			.attr("cx", v => v.x)
 			.attr("cy", v => v.y)
-			.attr("r", v => GraphSvgD3._radius(v, settings))
+			.attr("r", v => GraphSvg._radius(v, settings))
 			.attr("class", e => e.class);
 		vertices.exit().remove();
 
@@ -84,7 +83,7 @@ export class GraphSvgD3 {
 		verticesClipPath.html("").append("circle")
 			.attr("cx", v => v.x)
 			.attr("cy", v => v.y)
-			.attr("r", v => GraphSvgD3._radius(v, settings))
+			.attr("r", v => GraphSvg._radius(v, settings))
 		verticesClipPath.exit().remove();
 
 		var verticesImage = svg
@@ -94,10 +93,10 @@ export class GraphSvgD3 {
 		verticesImage
 			.attr("xlink:href", v => v.imageUrl)
 			.attr("clip-path", (v, i) => `url(#${elementId}-v${i})"`)
-			.attr("x", v => v.x - GraphSvgD3._radius(v, settings))
-			.attr("y", v => v.y - GraphSvgD3._radius(v, settings))
-			.attr("width", v => 2 * GraphSvgD3._radius(v, settings) + 1)
-			.attr("height", v => 2 * GraphSvgD3._radius(v, settings) + 1);
+			.attr("x", v => v.x - GraphSvg._radius(v, settings))
+			.attr("y", v => v.y - GraphSvg._radius(v, settings))
+			.attr("width", v => 2 * GraphSvg._radius(v, settings) + 1)
+			.attr("height", v => 2 * GraphSvg._radius(v, settings) + 1);
 		verticesImage.exit().remove();
 
 		var verticesLabel = svg
