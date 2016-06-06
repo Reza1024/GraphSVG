@@ -1,4 +1,4 @@
-﻿export module GraphSvg {
+﻿export module GraphSvgNonD3 {
 	export interface IPoint {
 		x: number;
 		y: number;
@@ -29,7 +29,7 @@
 }
 
 
-export class GraphSvg {
+export class GraphSvgNonD3 {
 	static defaultEdgeColor = `black`;
 	static defaultVertexFillColor = `black`;
 	static defaultVertexStrokeColor = `black`;

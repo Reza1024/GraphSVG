@@ -1,8 +1,8 @@
 "use strict";
-var GraphSvg = (function () {
-    function GraphSvg() {
+var GraphSvgNonD3 = (function () {
+    function GraphSvgNonD3() {
     }
-    GraphSvg.toSvg = function (elementId, graph, settings) {
+    GraphSvgNonD3.toSvg = function (elementId, graph, settings) {
         var svgBuilder = [];
         svgBuilder.push("<svg ", "id=\"" + elementId + "\" ", "width=\"" + settings.width + "\" ", "height=\"" + settings.height + "\" ", "version=\"1.1\" ", "xmlns=\"http://www.w3.org/2000/svg\" ", "xmlns:xlink=\"http://www.w3.org/1999/xlink\" ", (settings.svgViewBox) ? "viewBox=\"" + settings.svgViewBox + "\" " : "", ">");
         if (graph.verticesImagesUrl)
@@ -18,7 +18,7 @@ var GraphSvg = (function () {
         svgBuilder.push("</svg>");
         return svgBuilder.join("");
     };
-    GraphSvg._drawVertices = function (svgBuilder, graph, settings) {
+    GraphSvgNonD3._drawVertices = function (svgBuilder, graph, settings) {
         var vertexFillColor = settings.vertexFillColor;
         if (!vertexFillColor)
             vertexFillColor = GraphSvg.defaultVertexFillColor;
@@ -34,7 +34,7 @@ var GraphSvg = (function () {
         }
         svgBuilder.push("</g>");
     };
-    GraphSvg._drawEdges = function (svgBuilder, graph, settings) {
+    GraphSvgNonD3._drawEdges = function (svgBuilder, graph, settings) {
         var edgeColor = settings.edgeColor;
         if (!edgeColor)
             edgeColor = GraphSvg.defaultEdgeColor;
@@ -48,7 +48,7 @@ var GraphSvg = (function () {
         }
         svgBuilder.push("</g>");
     };
-    GraphSvg._drawVerticesClipPath = function (elementId, svgBuilder, graph, settings) {
+    GraphSvgNonD3._drawVerticesClipPath = function (elementId, svgBuilder, graph, settings) {
         svgBuilder.push("<defs>");
         for (var v = 0; v < graph.vertices.length; v++) {
             svgBuilder.push("<clipPath id=\"" + elementId + "-v" + v + "\">");
@@ -57,7 +57,7 @@ var GraphSvg = (function () {
         }
         svgBuilder.push("</defs>");
     };
-    GraphSvg._drawVerticesImage = function (elementId, svgBuilder, graph, settings) {
+    GraphSvgNonD3._drawVerticesImage = function (elementId, svgBuilder, graph, settings) {
         svgBuilder.push("<g>");
         for (var v = 0; v < graph.vertices.length; v++) {
             svgBuilder.push("<image ", "xlink:href=\"" + graph.verticesImagesUrl[v] + "\" ", "clip-path=\"url(#" + elementId + "-v" + v + ")\" ", "x=\"" + (graph.vertices[v].x - settings.vertexRadius) + "\" ", "y=\"" + (graph.vertices[v].y - settings.vertexRadius) + "\" ", "width=\"" + (2 * settings.vertexRadius + 1) + "\" ", "height=\"" + (2 * settings.vertexRadius + 1) + "\" ", ">");
@@ -67,7 +67,7 @@ var GraphSvg = (function () {
         }
         svgBuilder.push("</g>");
     };
-    GraphSvg._drawVerticesLabels = function (svgBuilder, graph, settings) {
+    GraphSvgNonD3._drawVerticesLabels = function (svgBuilder, graph, settings) {
         var textColor = settings.labelColor;
         if (!textColor)
             textColor = GraphSvg.defaultLabelColor;
@@ -81,11 +81,11 @@ var GraphSvg = (function () {
         }
         svgBuilder.push("</g>");
     };
-    GraphSvg.defaultEdgeColor = "black";
-    GraphSvg.defaultVertexFillColor = "black";
-    GraphSvg.defaultVertexStrokeColor = "black";
-    GraphSvg.defaultLabelColor = "white";
-    return GraphSvg;
+    GraphSvgNonD3.defaultEdgeColor = "black";
+    GraphSvgNonD3.defaultVertexFillColor = "black";
+    GraphSvgNonD3.defaultVertexStrokeColor = "black";
+    GraphSvgNonD3.defaultLabelColor = "white";
+    return GraphSvgNonD3;
 }());
-exports.GraphSvg = GraphSvg;
-//# sourceMappingURL=GraphSvg.js.map
+exports.GraphSvgNonD3 = GraphSvgNonD3;
+//# sourceMappingURL=GraphSvgNonD3.js.map
